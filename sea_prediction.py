@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 import datetime as dt
+import matplotlib.pyplot as plt
+import seaborn as sns
 from scipy import stats
 
 # load data in 
@@ -34,3 +36,22 @@ df_clean.year.value_counts()
 
 # there are no duplicate years so set years as index
 df = df_clean.set_index('year')
+
+
+
+# create scatter plot with year and sea level
+sns.scatterplot(data=df, x='year', y='CSIRO Adjusted Sea Level')
+plt.show()
+
+# use a linear regression to get slope and y-intercept and plot the line of best fit over the plot
+# need to create x and y array like variables to for the linear regression model
+
+# set X as years
+X = df.index.to_numpy()
+
+# set Y as sea level
+Y = df['CSIRO Adjusted Sea Level'].to_numpy()
+
+# create linear regression model
+linreg = stats.linregress(X,Y)
+linreg
